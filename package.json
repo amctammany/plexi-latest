@@ -1,0 +1,60 @@
+{
+  "name": "plexi",
+  "version": "0.0.1",
+  "description": "2D behavior based game engine",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack --config webpack.config.prod.js",
+    "dev": "webpack-dev-server --config webpack.config.dev.js"
+  },
+  "keywords": [
+    "game",
+    "engine",
+    "behaviors",
+    "stamp"
+  ],
+  "author": "Alex McTammany",
+  "license": "ISC",
+  "jest-webpack-alias": {
+    "configFile": "./webpack.config.dev.js",
+    "profile": "plexi"
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/preprocessor.js",
+    "unmockedModulePathPatterns": [
+      "supermixer",
+      "lodash"
+    ],
+    "globals": {
+      "Plexi": "true"
+    },
+    "testFileExtensions": [
+      "es6",
+      "js"
+    ],
+    "setupTestFrameworkScriptFile": "<rootDir>/before_test.js",
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "es6"
+    ],
+    "collectCoverage": true
+  },
+
+  "devDependencies": {
+    "babel-jest": "^12.1.0",
+    "babel-loader": "^6.2.4",
+    "babel-polyfill": "^6.9.1",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "copy-webpack-plugin": "^3.0.0",
+    "file-loader": "^0.8.5",
+    "jest-cli": "^12.1.1",
+    "jest-webpack-alias": "^2.3.0",
+    "style-loader": "^0.13.1",
+    "supermixer": "^1.0.2",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
