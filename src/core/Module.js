@@ -36,12 +36,10 @@ class Module {
   constructor(stamp, ...templates) {
     //console.log(templates);
     if (stamp.hasOwnProperty('behaviors')) {
-      console.log(stamp.behaviors)
       templates.push(...stamp.behaviors);
     }
     //console.log(templates);
     let temps = templates.map(t => {
-      console.log(t)
       if (t.fixed) {
         return t;
       } else if (isObject(t)) {

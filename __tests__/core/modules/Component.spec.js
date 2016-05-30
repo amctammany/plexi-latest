@@ -15,9 +15,6 @@ var config = {
     state: {
 
     },
-    components: [
-      {}
-    ]
   },
 };
 
