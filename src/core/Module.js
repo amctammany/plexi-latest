@@ -1,5 +1,36 @@
 import {isObject} from 'lodash';
 import Stamp from './Stamp';
+function findBehavior(bhvr) {
+  //console.log('plexi: ' + Plexi);
+  //console.log(bhvr);
+  //Behavior = require('./modules/Behavior.js');
+  if (isObject(bhvr)) {
+    if (bhvr.fixed) {
+      return bhvr;
+    } else {
+      return new Stamp(bhvr);
+    }
+    return bhvr;
+  } else if (typeof(bhvr) === 'string') {
+    let b = Plexi.Behavior.find(bhvr);
+    let bt = Plexi.BodyType.find(bhvr);
+    console.log(bhvr);
+    if (b) {
+      console.log(b);
+      return b;
+    //} else if (bt) {
+      //console.log(bhvr);
+      //console.log(bt);
+      //return bt;
+    } else {
+      throw 'come back later';
+    }
+  } else {
+    throw 'fail?'
+
+  }
+
+}
 
 class Module {
   constructor(stamp, ...templates) {
@@ -40,8 +71,9 @@ class Module {
     if (this._children.hasOwnProperty(id)) {
       return this._children[id];
     } else {
-      console.warn(`Invalid Find: ${id};`);
-      return;
+      //console.log(id);
+      throw new Error('Invalid find: ' + id);
+      //return;
     }
   }
   static reset() {

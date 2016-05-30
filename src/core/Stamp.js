@@ -63,6 +63,8 @@ function compose(...factories) {
       addInit(result.fixed, source.fixed.init);
       addProps(result.fixed, source.fixed.props);
       addRefs(result.fixed, source.fixed.refs);
+    } else {
+      throw new Error('Uncomposable Factory');
     }
   })
   //console.log(result)

@@ -57,6 +57,7 @@ describe('Stamp', () => {
     composeStamp = testStamp.compose(otherStamp);
     stamp = testStamp.create();
     other = otherStamp.create();
+    //console.log(Plexi)
   });
 
   it('should replicate', () => {
@@ -78,6 +79,12 @@ describe('Stamp', () => {
   it('should add init', () => {
     let newStamp = testStamp.init({foo: function () {return 'bar'}});
     expect(newStamp.fixed.init.length).toBe(2);
+  });
+  it('should fail when composed with not a stamp', () => {
+    expect(function () {
+      testStamp.compose({name: 'foo'});
+    }).toThrow(new Error('Uncomposable Factory'));
+
   });
   it('should only add init method if needed', () => {
     expect(testStamp.fixed.init.length).toBe(1);

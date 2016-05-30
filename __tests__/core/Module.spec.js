@@ -30,8 +30,9 @@ describe('Module', () => {
     expect(res).toBe(mod);
   });
   it('should fail to find module', () => {
-    let expected = Module.find('notreal');
-    expect(!!expected).toBe(false);
+    expect(function () {Module.find('notreal')}).toThrow(new Error('Invalid find: notreal'));
+    //let expected = Module.find('notreal');
+    //expect(!!expected).toBe(false);
   });
   it('should size module children', () => {
     expect(Module.size()).toBe(0);

@@ -4,7 +4,7 @@ var Plexi = {
   Module,
 
   doSomething: function () {
-    console.log('something');
+    //console.log('something');
     return 'something';
   },
   load: function () {
