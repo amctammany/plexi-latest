@@ -41,6 +41,7 @@ class Module {
     }
     //console.log(templates);
     let temps = templates.map(t => {
+      console.log(t)
       if (t.fixed) {
         return t;
       } else if (isObject(t)) {

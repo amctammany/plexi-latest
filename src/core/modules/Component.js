@@ -1,8 +1,9 @@
 import Referential from '../../behaviors/Common/Referential';
+import Tiled from '../../behaviors/Common/Tiled';
 import Module from '../Module';
 
 var ComponentStamp = {
-  behaviors: [Referential],
+  behaviors: [Referential, Tiled],
   refs: {
 
   },
