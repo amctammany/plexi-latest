@@ -56,7 +56,7 @@ class Module {
 
 
   static create(id, config, ...stamps) {
-    if (stamps.length) console.log(stamps);
+    //if (stamps.length) console.log(stamps);
     this._children = this._children || {};
     let m = new this(config, ...stamps);
     m.fixed.refs._type = id;

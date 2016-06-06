@@ -1,4 +1,8 @@
 module.exports = {
+  requires: {
+    components: ['UI.Div'],
+    behaviors: [],
+  },
   Component: {
     RedDiv: {
       _componentType: 'UI.Div',
