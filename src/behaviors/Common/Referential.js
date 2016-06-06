@@ -13,7 +13,7 @@ var Referential = {
   //},
   methods: {
     getRef: function getRef(ref, data) {
-      if (!ref) return;
+      //if (!ref) return;
       //console.log(ref);
       //console.log(this.game);
       //console.log(data)

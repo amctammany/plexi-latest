@@ -1,10 +1,69 @@
 module.exports = {
   requires: {
-    components: ['UI.Div', 'UI.Button'],
+    components: ['UI.Div', 'UI.Button', 'Composite.List'],
     behaviors: [],
     actions: ['Base'],
   },
+  Action: {
+    BOTTOM_BUTTON_PRESS: {
+      refs: {},
+      props: {
+        actions: [
+          {
+            type: 'CHANGE_STATE',
+            payload: {
+              ref: '@selected',
+              value: '@id',
+            },
+          },
+          {
+            type: 'CHANGE_STATE',
+            payload: {
+              ref: '$counter',
+              value: '@increment',
+            },
+          },
+
+        ],
+      },
+    },
+  },
   Component: {
+    BottomButton: {
+      _componentType: 'UI.Button',
+      refs: {
+
+      },
+      props: {
+        action: {
+          type: 'BOTTOM_BUTTON_PRESS',
+          payload: {
+
+          },
+        },
+        style: {
+          background: 'grey',
+        },
+      },
+    },
+    Menu: {
+      _componentType: 'Composite.List',
+      refs: {
+        template: 'BottomButton',
+        orientation: 'horizontal',
+      },
+      props: {
+        style: {
+          background: 'red',
+        },
+        grid: {
+          padding: 10,
+        },
+        state: {
+          selected: null,
+        },
+      },
+    },
     RedDiv: {
       _componentType: 'UI.Div',
       refs: {
@@ -91,20 +150,25 @@ module.exports = {
       _componentType: 'UI.Div',
       props: {
         position: {row: 0, column: 0},
-        grid: {rows: 3, columns: 3, padding: 10},
+        grid: {rows: 5, columns: 5, padding: 10},
         components: [
           {
             type: 'GreenDiv',
             props: {
               position: {row: 0, column: 0},
-              size: {rows: 1, columns: 3},
+              size: {rows: 1, columns: 5},
             },
           },
           {
-            type: 'RedDiv',
+            type: 'Menu',
             props: {
-              position: {row: 2, column: 0},
-              size: {rows: 1, columns: 3},
+              position: {row: 4, column: 0},
+              size: {rows: 1, columns: 5},
+              items: [
+                {text: 'foo', state: {id: 'foo', increment: 0}},
+                {text: 'notfoo', state: {id: 'notfoo', increment: 100}},
+                //{text: 'notfoo', action: {type: 'CHANGE_STATE', payload: {ref: '$counter', value: 100}}},
+              ],
             },
           },
 
