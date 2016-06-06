@@ -92,7 +92,7 @@ var Referential = {
             }
             c = c.parent;
           }
-          return false;
+          return ref;
         }
       } else if (isArray(ref)) {
         return ref.map(r => {

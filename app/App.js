@@ -15,7 +15,7 @@ module.exports = {
             type: 'UIDiv',
             props: {
               position: {row: 0, column: 0},
-              text: '1',
+              text: 'hi',
             }
           }
         ]

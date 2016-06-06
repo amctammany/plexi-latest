@@ -38,6 +38,7 @@ var ComponentStamp = {
       });
     }
     this.postUpdate = this.postUpdate || function (game, state) {
+      //console.log(this.text);
       if (this.text !== undefined) {
         //console.log(this.text);
         this.$el.innerHTML = this.getRef(this.text) || 'foo';
@@ -61,7 +62,19 @@ var ComponentStamp = {
     render: function render(parent, element) {
       this.parent = parent;
       let el = document.createElement(this._tag);
+      //console.log(this);
       let type = this._type.replace('.', '-');
+      if (this.style && this.game) {
+        this.game.addCSSClass(type, null, this.style);
+      }
+      if (this.classes) {
+        Object.keys(this.classes).forEach(c => {
+          let klass = this.classes[c];
+          this.game.addCSSClass(type, c, klass);
+          //console.log(this)
+        })
+      }
+
       this._classNames = ['Component', type];
       if (this.className) {
         this._classNames.push(this.className);
@@ -115,8 +128,16 @@ var ComponentStamp = {
       //this.update(game);
     },
     update: function update(game) {
-      if (this._component) {
-        this._component.update(game);
+      if (this.preUpdate) {
+        this.preUpdate(game);
+      }
+      if (this._components) {
+        this._components.forEach(c => {
+           c.update(game);
+        })
+      }
+      if (this.postUpdate) {
+        this.postUpdate(game);
       }
     },
   },

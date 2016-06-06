@@ -26,7 +26,7 @@ var Plexi = {
 
   createGame: function (div, config) {
     let game = new Game(div, config);
-    console.log(game);
+    //console.log(game);
     this.Game = game;
     game.refresh();
     return game;
