@@ -48,45 +48,13 @@ var Referential = {
             }
             c = c.parent;
           }
-
-          ////console.log(data)
-          ////console.log(tail);
-          //while (c) {
-            //let v = get(c.state, tail);
-            ////console.log(tail)
-            //console.log(v);
-            //if (!!v) {
-              //if (isRef(v)) {
-                ////console.log(c.getRef(v, data));
-                //return c.getRef(v, data);
-              //} else if (c.hasOwnProperty(v)) {
-                ////console.log(c.getRef(v, data));
-                //return c[v];
-              //} else {
-                ////console.log(tail);
-                ////console.log(v);
-                //return v;
-              //}
-            //} else {
-              //if (c.hasOwnProperty(v)) {
-                //return c[v];
-              //}
-            //}
-            //c = c.parent;
-          //}
         } else if (head === '$') {
-          var l = this.game.getRef(tail);
-          //console.log(l);
+          var l = Plexi.Game.getRef(tail);
           return l;
-          //return get(this.game.state, tail);
-          //
         } else {
-          //console.log(this);
-          //console.log(ref)
           let c = this;
           while (c) {
             let res = get(c, ref);
-            //console.log(res);
             if (res) {
               return res;
             }
@@ -104,10 +72,7 @@ var Referential = {
           res[k] = this.getRef(ref[k], data);
         });
         return res;
-         //console.log('get ref object');
       } else {
-        //console.log('Reference fail');
-        //console.log(ref);
         throw new Error('Invalid reference: ' + ref);
       }
       return ref;
@@ -119,36 +84,21 @@ var Referential = {
         let tail = ref.slice(1);
         if (head === '@') {
           let c = this;
-          //let s = get(c, tail);
-          //if (s !== undefined) {
-            //console.log(s);
-            //return this.setRef(s, value);
-          //}
           while (c) {
-          //console.log(c.state);
             let v = get(c.state, tail);
             if (v !== undefined) {
               if (isRef(v)) {
-                //console.log(v);
                 return this.setRef(v, value);
               } else {
                 return set(c.state, tail, value)
-
-                //set(this.state, tail, value);
-                //console.log('set?')
               }
-              //if (this.game) c.update(this.game);
-              //console.log('setting value: ' + value);
               return value;
             }
             c = c.parent;
           }
           set(this.state, tail, value);
         } else if (head === '$') {
-          this.game.setRef(tail, value);
-          //set(Plexi.Game.state, tail, value);
-          //this.game.refresh();
-          //Plexi.Game.refresh();
+          Plexi.Game.setRef(tail, value);
           return;
         } else {
           set(this.state, ref, value);
@@ -158,8 +108,6 @@ var Referential = {
       } else {
         throw new Error('Invalid reference');
       }
-      //console.log('fail at ref: ' + ref)
-      //return ref;
     },
 
   }

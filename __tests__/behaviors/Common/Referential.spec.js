@@ -7,6 +7,9 @@ var ReferentialStamp = new Stamp(Referential);
 
 var parent, child;
 
+Plexi.Game.state = {
+  foo: 'bar',
+};
 var game = {
   refs: {
     foo: 'bar',

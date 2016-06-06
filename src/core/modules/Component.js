@@ -26,10 +26,10 @@ var ComponentStamp = {
     //
     //console.log(this.game)
     if (this.onclick) {
-      this._onclick = this.onclick.bind(this, game);
+      this._onclick = this.onclick.bind(this);
     }
     if (this.onblur) {
-      this._onblur = this.onblur.bind(this, game);
+      this._onblur = this.onblur.bind(this);
     }
     if (this.components.length === 0) {
       this._components = [];
@@ -44,8 +44,8 @@ var ComponentStamp = {
     this.postUpdate = this.postUpdate || function (game, state) {
       //console.log(this.text);
       if (this.text !== undefined) {
-        //console.log(this.text);
-        this.$el.innerHTML = this.getRef(this.text) || 'foo';
+        let text = this.getRef(this.text);
+        this.$el.innerHTML = (text !== undefined) ? text : 'foo';
       }
     }
 

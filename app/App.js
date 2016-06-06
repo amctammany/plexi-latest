@@ -1,24 +1,51 @@
 module.exports = {
   requires: {
-    components: ['UI.Div'],
+    components: ['UI.Div', 'UI.Button'],
     behaviors: [],
   },
   Component: {
     RedDiv: {
       _componentType: 'UI.Div',
       refs: {
+        grid: {rows: 1, columns: 3, padding: 10},
         style: {
           background: 'red',
         },
+      },
+      props: {
+        components: [
+          {
+            type: 'UI.Button',
+            props: {
+              position: {row: 0, column: 0},
+              text: 'button',
+              action: [],
+            },
+          },
+        ],
       },
     },
     GreenDiv: {
       _componentType: 'UI.Div',
       refs: {
+        grid: {rows: 1, columns: 3, padding: 10},
         style: {
           background: 'green',
         },
       },
+      props: {
+        components: [
+          {
+            type: 'UI.Button',
+            props: {
+              position: {row: 0, column: 0},
+              text: '$counter',
+              action: [],
+            },
+          },
+        ],
+      },
+
     },
     MainDiv: {
       _componentType: 'UI.Div',
@@ -31,7 +58,6 @@ module.exports = {
             props: {
               position: {row: 0, column: 0},
               size: {rows: 1, columns: 3},
-              text: 'hi',
             },
           },
           {
@@ -39,7 +65,6 @@ module.exports = {
             props: {
               position: {row: 2, column: 0},
               size: {rows: 1, columns: 3},
-              text: 'hi',
             },
           },
 

@@ -1,5 +1,5 @@
 import Stage from './modules/Stage';
-import {isObject} from 'lodash';
+import {isFunction, isObject, isString, get, set} from 'lodash';
 
 function parseStyle(style, prefix = '') {
   let s = Object.keys(style).map(parent => {
@@ -107,29 +107,54 @@ class Game {
     this.Stage.update(this, this.$el);
   }
 
+  getRef(ref, src) {
+    var result, module;
+    if (isString(ref)) {
+      if (ref.charAt(0) === '$') {
+        let tail = ref.slice(1);
+        let mod = tail.split('.')[0];
+        module = Plexi[mod];
+        result = get(Plexi, tail);
+        //return get(Plexi, tail);
+      } else if (ref.charAt(0) === '@') {
+
+      } else {
+        result = get(this.state, ref);
+        if (result !== undefined) {
+          return result;
+        } else {
+          result = get(this, ref);
+        }
+      }
+    }
+    if (isFunction(result)) {
+       //console.log('is fn');
+       //console.log(src);
+       //console.log(result)
+       //console.log(result());
+       let r = result.bind(module);
+       //console.log(r());
+       //console.log(Plexi.BodyType.children())
+       return r();
+    }
+    return result;
+  }
+  setRef(ref, value) {
+    set(this.state, ref, value);
+    //this.refresh();
+  }
+
+
   dispatch(src, event, data) {
-    //console.log(src);
-    //console.log(event);
     if (!event) return;
-    //console.log(...data);
     let action = Action.find(event.type);
     if (!!action) {
 
-    //console.log(event.payload);
       let a = action.create({});
-    //console.log(a);
-    //console.log(a);
-    //console.log(event.payload);
       a.execute(src, event.payload, data);
-      //this.refresh();
     } else {
       console.warn('invalid event: ' + event);
     }
-    //console.log(action);
-    //console.log(event);
-    //console.log(src);
-    //let s = src.getRef(event.payload);
-    //console.log(s);
   }
 }
 
