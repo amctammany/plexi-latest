@@ -12,7 +12,8 @@ Plexi.Component.create('UI.Div', {
 });
 Plexi.load(App);
 Plexi.createGame('main-div', {
-  Stage: 'Main',
   width: 800,
   height: 600,
+}).init({
+  Stage: 'Main',
 });

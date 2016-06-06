@@ -93,6 +93,12 @@ class Game {
     }
     _styleDirty = false;
   }
+  init(config) {
+    if (config.Stage) {
+      this.changeStage(config.Stage);
+    }
+    this.refresh();
+  }
   refresh() {
     //console.log(this.Stage)
     if (!this.Stage) return;
