@@ -64,7 +64,7 @@ class Module {
     return m;
   }
   static find(id) {
-    //if (!this._children) return;
+    if (!this._children) return;
     //if (!this._children.hasOwnProperty(id)) return;
     //let result = this._children[id];
     if (this._children.hasOwnProperty(id)) {

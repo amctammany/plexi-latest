@@ -2,6 +2,7 @@ module.exports = {
   requires: {
     components: ['UI.Div', 'UI.Button'],
     behaviors: [],
+    actions: ['Base'],
   },
   Component: {
     RedDiv: {
@@ -39,10 +40,49 @@ module.exports = {
             type: 'UI.Button',
             props: {
               position: {row: 0, column: 0},
-              text: '$counter',
-              action: [],
+              text: '-5',
+              action: {
+                type: 'CHANGE_STATE',
+                payload: {
+                  ref: '$counter',
+                  fn: 'add',
+                  value: -5,
+                },
+              },
             },
           },
+
+          {
+            type: 'UI.Button',
+            props: {
+              position: {row: 0, column: 1},
+              text: '$counter',
+              action: {
+                type: 'CHANGE_STATE',
+                payload: {
+                  ref: '$counter',
+                  fn: 'add',
+                  value: 10,
+                },
+              },
+            },
+          },
+          {
+            type: 'UI.Button',
+            props: {
+              position: {row: 0, column: 2},
+              text: '+5',
+              action: {
+                type: 'CHANGE_STATE',
+                payload: {
+                  ref: '$counter',
+                  fn: 'add',
+                  value: 5,
+                },
+              },
+            },
+          },
+
         ],
       },
 

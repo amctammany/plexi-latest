@@ -2,15 +2,16 @@ jest.unmock('../../src/core/Module');
 jest.unmock('../../src/core/Stamp');
 jest.unmock('../../src/core/modules/Component')
 jest.unmock('../../src/core/modules/Stage')
+jest.unmock('../../src/core/modules/Action')
 
 var Module = require('../../src/core/Module');
-var Stage = require('../../src/core/modules/Stage');
+var Game = require('../../src/core/Game');
 
-describe('Stage', () => {
+describe('Game', () => {
   beforeEach(function () {
 
   });
   it('should be true', () => {
-    expect(!!Stage).toBe(true);
+    expect(!!Game).toBe(true);
   });
 });

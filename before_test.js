@@ -1,9 +1,9 @@
-//jest.disableAutomock();
+jest.disableAutomock();
 jest.unmock('./src/Plexi');
 jest.unmock('./src/core/Game');
 jest.unmock('./src/core/Module');
 jest.unmock('./src/core/Stamp');
-//jest.unmock('./src/core/modules/Ac');
+jest.unmock('./src/core/modules/Action');
 //jest.unmock('./src/actions/Base');
 
 Plexi = require('./src/Plexi');

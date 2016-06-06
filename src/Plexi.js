@@ -1,22 +1,41 @@
 import Module from './core/Module';
 import Game from './core/Game';
-//import Behavior from './core/modules/Behavior';
+import Action from './core/modules/Action';
 import Component from './core/modules/Component';
 import Stage from './core/modules/Stage';
 
+import Actions from './actions/';
 import Components from './components/';
 
-var _componentsLoaded = false;
+var _componentsLoaded = false,
+    _actionsLoaded = false;
 var Plexi = {
   Module,
+  Action,
   //Game: null,
   //Behavior,
   Component,
+
   Stage,
 
   doSomething: function () {
     //console.log('something');
     return 'something';
+  },
+
+  loadActions: function loadActions(actions = []) {
+    if (actions.length < 1) return;
+    if (!_actionsLoaded) {
+      actions.forEach(a => {
+        let [group, key] = a.split('.');
+        if (key) {
+          return Action.create(a, Actions[group][key]);
+        } else {
+          //console.log(group)
+          return Action.createAll(Actions[group]);
+        }
+      })
+    }
   },
 
   //loadBodyTypes: function loadBodyTypes(bodytypes) {
@@ -50,8 +69,9 @@ var Plexi = {
   load: function (config) {
     Object.keys(config).forEach(m => {
       if (m === 'requires') {
-        console.log(config[m]);
+        //console.log(config[m]);
         this.loadComponents(config[m].components);
+        this.loadActions(config[m].actions);
 
       } else if (this.hasOwnProperty(m)){
         Object.keys(config[m]).forEach(k => {

@@ -1,3 +1,4 @@
+import Action from './modules/Action';
 import Stage from './modules/Stage';
 import {isFunction, isObject, isString, get, set} from 'lodash';
 
