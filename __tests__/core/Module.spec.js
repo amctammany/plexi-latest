@@ -11,6 +11,10 @@ var config = {
     bar: 'foo',
   },
 };
+var templates = [
+  {refs: {name: 't1'}},
+  {refs: {n2: 't2'}},
+];
 
 describe('Module', () => {
   beforeEach(function () {
@@ -46,6 +50,13 @@ describe('Module', () => {
     let mod1 = Module.create('one', {});
     children = Module.children();
     expect(children).toContain(mod, mod1);
+  });
+  it('should create module from templates', () => {
+    let newmod = Module.create('newmod', config, templates);
+    //console.log(newmod);
+  });
+  it('should bypass invalid template if given', () => {
+    let newmod = Module.create('newmod', config, 'foobar', templates);
   });
 
 });

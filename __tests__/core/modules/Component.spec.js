@@ -1,6 +1,8 @@
 jest.unmock('../../../src/core/Module');
 jest.unmock('../../../src/core/Stamp');
 jest.unmock('../../../src/core/modules/Component');
+jest.unmock('../../../src/behaviors/Common/Referential');
+jest.unmock('../../../src/behaviors/Common/Tiled');
 
 var Component = require('../../../src/core/modules/Component');
 var comp, c;
@@ -21,11 +23,12 @@ var config = {
 describe('Component', () => {
   beforeEach(function () {
     comp = Component.create('comp', config);
-    c = comp.create({game: {addCSSClass: function () {}}});
+    c = comp.create();
     c.render(c);
 
   });
   it('should be true', () => {
+    //console.log(Plexi);
     expect(!!Component).toBe(true);
     expect(!!comp).toBe(true);
     expect(!!c).toBe(true);

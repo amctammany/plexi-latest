@@ -7,13 +7,12 @@ var StageStamp = {
   props: {
     component: null,
   },
-  init: function init({instance: {game}}) {
+  init: function init() {
     //console.log(game);
     if (!Component.find(this.component)) return;
     this._component = Component.find(this.component).create({
-      game,
-      width: this.width || game.width || 100,
-      height: this.height || game.height || 100,
+      width: this.width || Plexi.Game.width || 100,
+      height: this.height || Plexi.Game.height || 100,
     });
   },
 

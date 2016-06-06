@@ -20,7 +20,11 @@ var ComponentStamp = {
     style: {},
     classes: [],
   },
-  init: function init({instance: {game}}) {
+  init: function init() {
+    //console.log(game);
+    //this.game = game;
+    //
+    //console.log(this.game)
     if (this.onclick) {
       this._onclick = this.onclick.bind(this, game);
     }
@@ -31,7 +35,7 @@ var ComponentStamp = {
       this._components = [];
     } else {
       this._components = this.components.map((c) => {
-        c.props.game = game;
+        //c.props.game = game;
         let res = Component.find(c.type).create(c.props);
         res.parent = this;
         return res;
@@ -60,17 +64,18 @@ var ComponentStamp = {
 
     },
     render: function render(parent, element) {
+      //this.game = parent.game;
       this.parent = parent;
       let el = document.createElement(this._tag);
-      //console.log(this);
+      //console.log(Plexi.Game);
       let type = this._type.replace('.', '-');
-      if (this.style && this.game) {
-        this.game.addCSSClass(type, null, this.style);
+      if (this.style && Plexi.Game) {
+        Plexi.Game.addCSSClass(type, null, this.style);
       }
       if (this.classes) {
         Object.keys(this.classes).forEach(c => {
           let klass = this.classes[c];
-          this.game.addCSSClass(type, c, klass);
+          Plexi.Game.addCSSClass(type, c, klass);
           //console.log(this)
         })
       }
@@ -128,6 +133,12 @@ var ComponentStamp = {
       //this.update(game);
     },
     update: function update(game) {
+      if (!this.$el) return;
+      this.$el.classList = [];
+      this._classNames.forEach(c => {
+        this.$el.classList.add(this.getRef(c));
+      });
+
       if (this.preUpdate) {
         this.preUpdate(game);
       }

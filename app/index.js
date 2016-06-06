@@ -2,8 +2,7 @@ require('./index.html');
 
 var App = require('./App');
 
-Plexi.load(App);
-Plexi.Component.create('UIDiv', {
+Plexi.Component.create('UI.Div', {
   refs: {
     _tag: 'div',
     style: {
@@ -11,6 +10,7 @@ Plexi.Component.create('UIDiv', {
     },
   },
 });
+Plexi.load(App);
 Plexi.createGame('main-div', {
   Stage: 'Main',
   width: 800,

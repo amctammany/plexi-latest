@@ -26,7 +26,7 @@ var _style = {}, _styleDirty = true;
 
 class Game {
   constructor(el, config) {
-    this.$el = document.getElementById(el) || document.create('div');
+    this.$el = document.getElementById(el) || document.createElement('div');
     this.width = config.width || 500;
     this.height = config.height || 500;
 
@@ -35,9 +35,10 @@ class Game {
 
     this.Stage = null;
     this.state = config.state || {};
-    this.changeStage(config.Stage);
+    //this.changeStage(config.Stage);
   }
   addCSSClass(parentClass, childClass, rules) {
+    //console.log(parentClass);
     _style[parentClass] = _style[parentClass] || {};
     if (childClass) {
       _style[parentClass][childClass] = rules;
@@ -57,7 +58,7 @@ class Game {
     //console.log(stage);
     var s;
     if (stage) {
-      s = stage.create({game: this});
+      s = stage.create();
       //console.log(s);
       s.render(this, this.$el);
     }

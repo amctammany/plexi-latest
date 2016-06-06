@@ -1,7 +1,8 @@
 jest.unmock('../src/Plexi');
 jest.unmock('../src/core/Module');
+jest.unmock('../src/core/Stamp');
 
-var Plexi = require('../src/Plexi');
+//var Plexi = require('../src/Plexi');
 
 describe('Plexi', () => {
   beforeEach(function() {
@@ -17,5 +18,11 @@ describe('Plexi', () => {
   it('should have Module', () => {
     expect(!!Plexi.Module).toBe(true);
     expect(Plexi.Module.size()).toBe(0);
+  });
+  it('should load', () => {
+    Plexi.load({Module: {One: {refs: {}, props: {}}}});
+    expect(Plexi.Module.size()).toBe(1);
+    Plexi.load({Module: {Two: {refs: {}, props: {}}}});
+    expect(Plexi.Module.size()).toBe(2);
   });
 });

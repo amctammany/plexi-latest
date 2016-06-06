@@ -6,7 +6,7 @@ import Stage from './core/modules/Stage';
 
 var Plexi = {
   Module,
-  Game,
+  //Game: null,
   //Behavior,
   Component,
   Stage,
@@ -25,11 +25,11 @@ var Plexi = {
   },
 
   createGame: function (div, config) {
-    let game = new Game(div, config);
+    this.Game = new Game(div, config);
     //console.log(game);
-    this.Game = game;
-    game.refresh();
-    return game;
+    //this.Game = game;
+    this.Game.refresh();
+    return this.Game;
   },
 
 };

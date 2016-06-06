@@ -1,25 +1,46 @@
 module.exports = {
   Component: {
-    UIDiv: {
+    RedDiv: {
+      _componentType: 'UI.Div',
       refs: {
-        _tag: 'div',
+        style: {
+          background: 'red',
+        },
+      },
+    },
+    GreenDiv: {
+      _componentType: 'UI.Div',
+      refs: {
+        style: {
+          background: 'green',
+        },
       },
     },
     MainDiv: {
-      _componentType: 'UIDiv',
+      _componentType: 'UI.Div',
       props: {
         position: {row: 0, column: 0},
         grid: {rows: 3, columns: 3, padding: 10},
         components: [
           {
-            type: 'UIDiv',
+            type: 'GreenDiv',
             props: {
               position: {row: 0, column: 0},
+              size: {rows: 1, columns: 3},
               text: 'hi',
-            }
-          }
-        ]
-      }
+            },
+          },
+          {
+            type: 'RedDiv',
+            props: {
+              position: {row: 2, column: 0},
+              size: {rows: 1, columns: 3},
+              text: 'hi',
+            },
+          },
+
+        ],
+      },
     },
   },
   Stage: {
