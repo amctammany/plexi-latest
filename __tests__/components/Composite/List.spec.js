@@ -13,13 +13,14 @@ describe('List', () => {
     div = document.createElement('div');
     Component.create('UI.Div', UIDivConfig);
     list = List.create({
-      game: new Game(null, {Stage: 'Main'}),
+      //game: new Game(null, {Stage: 'Main'}),
       template: 'UI.Div',
       items: [
         {text: 'foo1'},
         {text: 'foo2'},
       ],
     });
+    list.render(list, null);
     listRef = List.create({
       template: 'UI.Div',
       items: '$items',
@@ -59,5 +60,10 @@ describe('List', () => {
     let items = list.getItems();
     expect(items[0].text).toBe('foo1');
     expect(items[1].text).toBe('foo2');
+  });
+
+  it('should preUpdate list', () => {
+    list.preUpdate();
+    console.log(list.getItems());
   });
 });

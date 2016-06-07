@@ -1,6 +1,6 @@
 module.exports = {
   requires: {
-    components: ['UI.Div', 'UI.Button', 'Composite.List'],
+    components: ['UI.Div', 'UI.Button', 'Composite.List', 'Display.Canvas'],
     behaviors: [],
     actions: ['Base'],
   },
@@ -24,6 +24,29 @@ module.exports = {
             },
           },
 
+        ],
+      },
+    },
+    CANVAS_MOUSEDOWN: {
+      refs: {
+
+      },
+      props: {
+        actions: [
+          {
+            type: 'CHANGE_STATE',
+            payload: {
+              ref: '$position.x',
+              value: '#position.x',
+            },
+          },
+          {
+            type: 'CHANGE_STATE',
+            payload: {
+              ref: '$position.y',
+              value: '#position.y',
+            },
+          },
         ],
       },
     },
@@ -73,6 +96,22 @@ module.exports = {
         state: {
           selected: null,
         },
+      },
+    },
+    MainCanvas: {
+      _componentType: 'Display.Canvas',
+      refs: {
+        action: {
+          type: 'CANVAS_MOUSEDOWN',
+          payload: {
+            //x: '#position.x',
+            //y: '#position.y',
+          }
+        }
+
+      },
+      props: {
+
       },
     },
     RedDiv: {
@@ -168,6 +207,13 @@ module.exports = {
             props: {
               position: {row: 0, column: 0},
               size: {rows: 1, columns: 5},
+            },
+          },
+          {
+            type: 'MainCanvas',
+            props: {
+              position: {row: 1, column: 0},
+              size: {rows: 3, columns: 5},
             },
           },
           {

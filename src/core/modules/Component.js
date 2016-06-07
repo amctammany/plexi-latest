@@ -24,7 +24,6 @@ var ComponentStamp = {
     //console.log(game);
     //this.game = game;
     //
-    //console.log(this.game)
     if (this.onclick) {
       this._onclick = this.onclick.bind(this);
     }
@@ -132,7 +131,7 @@ var ComponentStamp = {
       //this.$el = el;
       //this.update(game);
     },
-    update: function update(game) {
+    update: function update() {
       if (!this.$el) return;
       this.$el.classList = [];
       this._classNames.forEach(c => {
@@ -140,15 +139,15 @@ var ComponentStamp = {
       });
 
       if (this.preUpdate) {
-        this.preUpdate(game);
+        this.preUpdate();
       }
       if (this._components) {
         this._components.forEach(c => {
-           c.update(game);
+           c.update();
         })
       }
       if (this.postUpdate) {
-        this.postUpdate(game);
+        this.postUpdate();
       }
     },
   },
