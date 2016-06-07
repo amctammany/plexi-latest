@@ -124,7 +124,7 @@ class Game {
     this.refresh();
   }
   refresh() {
-    console.log(this.Stage)
+    //console.log(this.Stage)
     if (!this.Stage) return;
     this.refreshStyleSheet();
 
@@ -168,7 +168,7 @@ class Game {
     //this.refresh();
   }
   reset() {
-    console.log(this._canvas)
+    //console.log(this._canvas)
     if (!this._canvas) return;
     if (!!_animFrame) window.cancelAnimationFrame(_animFrame);
     _animFn();

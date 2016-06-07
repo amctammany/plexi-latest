@@ -6,8 +6,8 @@ var Rectangle = {
   refs: {
   },
   props: {
-    width: null,
-    height: null,
+    width: 5,
+    height: 5,
   },
   init: function init() {
     var hw = this.width / 2;

@@ -111,7 +111,7 @@ var CREATE_BODY = {
   methods: {
     exec: function exec(src, payload, data) {
       let load = src.getRef(payload, data);
-      console.log(load);
+      //console.log(load);
       //let bt = BodyType.find(load.bodytype);
       //let body = bt.create(load.config);
       //console.log(body);
