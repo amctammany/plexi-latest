@@ -51,6 +51,16 @@ module.exports = {
       },
     },
   },
+  BodyType: {
+    Square: {
+      behaviors: ['BodyType.Rectangle'],
+      props: {
+        width: 50,
+        height: 50,
+        background: 'black',
+      },
+    },
+  },
   Component: {
     BottomButton: {
       _componentType: 'UI.Button',
