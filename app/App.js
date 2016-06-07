@@ -20,7 +20,7 @@ module.exports = {
             type: 'CHANGE_STATE',
             payload: {
               ref: '$counter',
-              value: '@increment',
+              value: '@id',
             },
           },
 
@@ -38,7 +38,7 @@ module.exports = {
         action: {
           type: 'BOTTOM_BUTTON_PRESS',
           payload: {
-
+            id: '@id',
           },
         },
         style: {
@@ -51,6 +51,17 @@ module.exports = {
       refs: {
         template: 'BottomButton',
         orientation: 'horizontal',
+        dictionary: {
+          text: 'fixed.refs._type',
+          state: {
+            id: '@text',
+          },
+        },
+        classes: {
+          selected: {
+            border: '2px solid white',
+          },
+        },
       },
       props: {
         style: {
@@ -164,11 +175,7 @@ module.exports = {
             props: {
               position: {row: 4, column: 0},
               size: {rows: 1, columns: 5},
-              items: [
-                {text: 'foo', state: {id: 'foo', increment: 0}},
-                {text: 'notfoo', state: {id: 'notfoo', increment: 100}},
-                //{text: 'notfoo', action: {type: 'CHANGE_STATE', payload: {ref: '$counter', value: 100}}},
-              ],
+              items: '$$Component.children'
             },
           },
 
