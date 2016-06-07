@@ -1,5 +1,6 @@
 import Action from './modules/Action';
 import Stage from './modules/Stage';
+import World from './modules/World';
 import {isFunction, isObject, isString, get, set} from 'lodash';
 
 function parseStyle(style, prefix = '') {
@@ -25,6 +26,7 @@ function parseStyle(style, prefix = '') {
 }
 var _style = {}, _styleDirty = true;
 
+var _animFrame, _animFn;
 class Game {
   constructor(el, config) {
     this.$el = document.getElementById(el) || document.createElement('div');
@@ -35,7 +37,9 @@ class Game {
     this.$el.style.height = this.height;
 
     this.Stage = null;
+    this._canvas = {};
     this.state = config.state || {};
+    _animFn = this.animate.bind(this);
     //this.changeStage(config.Stage);
   }
   addCSSClass(parentClass, childClass, rules) {
@@ -78,6 +82,22 @@ class Game {
     this.paused = false;
     return this.Stage;
   }
+  loadWorld(worldName) {
+    let world = World.find(worldName);
+    var w;
+    if (world) {
+       w = world.create()
+    }
+    return w;
+  }
+  changeWorld(worldName) {
+    if (!worldName) return;
+    this.paused = true;
+    this._worldName = worldName;
+    this.World = this.loadWorld(worldName);
+    this.paused = false;
+    return this.World;
+  }
   refreshStyleSheet() {
     //if (!_styleDirty) return;
     let oldStyle = this.$el.getElementsByTagName('style')[0];
@@ -98,10 +118,13 @@ class Game {
     if (config.Stage) {
       this.changeStage(config.Stage);
     }
+    if (config.World) {
+      this.changeWorld(config.World);
+    }
     this.refresh();
   }
   refresh() {
-    //console.log(this.Stage)
+    console.log(this.Stage)
     if (!this.Stage) return;
     this.refreshStyleSheet();
 
@@ -144,7 +167,32 @@ class Game {
     set(this.state, ref, value);
     //this.refresh();
   }
+  reset() {
+    console.log(this._canvas)
+    if (!this._canvas) return;
+    if (!!_animFrame) window.cancelAnimationFrame(_animFrame);
+    _animFn();
+  }
 
+  animate(delta) {
+    if (!window.requestAnimationFrame) return;
+    if (this.state.paused) return window.setTimeout(_animFn, 100);
+    this.advance(delta);
+    _animFrame = window.requestAnimationFrame(_animFn);
+  }
+  advance(delta) {
+    if (!this.World) return;
+    //console.log(this.World);
+    //this.World.integrate(delta);
+    this.World.render(this.getCanvas('MainCanvas'));
+    return;
+  }
+  registerCanvas(id, canvas) {
+    this._canvas[id] = canvas;
+  }
+  getCanvas(id) {
+    return this._canvas.hasOwnProperty(id) ? this._canvas[id].$el : null;
+  }
 
   dispatch(src, event, data) {
     if (!event) return;

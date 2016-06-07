@@ -12,4 +12,5 @@ Plexi.createGame('main-div', {
   },
 }).init({
   Stage: 'Main',
+  World: 'Main',
 });

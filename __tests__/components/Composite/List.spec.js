@@ -49,7 +49,7 @@ describe('List', () => {
       },
     });
     let items = l.getItems();
-    console.log(items);
+    //console.log(items);
     expect(items.length).toBe(3);
   })
   it('should have length from reference', () => {
@@ -64,6 +64,6 @@ describe('List', () => {
 
   it('should preUpdate list', () => {
     list.preUpdate();
-    console.log(list.getItems());
+    //console.log(list.getItems());
   });
 });

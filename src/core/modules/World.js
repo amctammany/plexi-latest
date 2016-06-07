@@ -29,6 +29,21 @@ var WorldStamp = {
         return body;
       }
     },
+    render: function render(canvas) {
+      let ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, this.width, this.height);
+      this.bodies.forEach(b => {
+        b.render(ctx);
+        //ctx.beginPath();
+        //ctx.rect(b.x, b.y, b.width, b.height);
+        //ctx.closePath();
+        //ctx.fill();
+      });
+      //let c = canvas.getContext('2d');
+      //c.clearRect(0, 0, canvas.width, canvas.height);
+      //c.drawImage(this.$canvas, 0, 0, canvas.width, canvas.height)
+
+    },
   },
 };
 

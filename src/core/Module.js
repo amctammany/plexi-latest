@@ -12,16 +12,28 @@ function findBehavior(bhvr) {
     }
     return bhvr;
   } else if (typeof(bhvr) === 'string') {
-    let b = Plexi.Behavior.find(bhvr);
-    let bt = Plexi.BodyType.find(bhvr);
+    var b, bt;
+    try {
+      b = Plexi.Behavior.find(bhvr);
+    } catch (e) {
+      console.log(e);
+    }
+    try {
+      bt = Plexi.BodyType.find(bhvr);
+    } catch (e) {
+      console.log(e);
+    }
+
+    //let b = Plexi.Behavior.find(bhvr);
+    //let bt = Plexi.BodyType.find(bhvr);
     //console.log(bhvr);
     if (b) {
       //console.log(b);
       return b;
-    //} else if (bt) {
+    } else if (bt) {
       //console.log(bhvr);
       //console.log(bt);
-      //return bt;
+      return bt;
     } else {
       throw 'come back later';
     }

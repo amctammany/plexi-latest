@@ -3,18 +3,27 @@ import Game from './core/Game';
 import Action from './core/modules/Action';
 import Component from './core/modules/Component';
 import Stage from './core/modules/Stage';
+import BodyType from './core/modules/BodyType';
+import Behavior from './core/modules/Behavior';
+import World from './core/modules/World';
 
 import Actions from './actions/';
+import BodyTypes from './bodytypes/';
 import Components from './components/';
 
 var _componentsLoaded = false,
-    _actionsLoaded = false;
+    _actionsLoaded = false,
+    _behaviorsLoaded = false,
+    _bodytypesLoaded = false;
 var Plexi = {
   Module,
   Action,
+  Behavior,
+  BodyType,
   //Game: null,
   //Behavior,
   Component,
+  World,
 
   Stage,
 
@@ -38,24 +47,24 @@ var Plexi = {
     }
   },
 
-  //loadBodyTypes: function loadBodyTypes(bodytypes) {
-    //if (!_bodytypesLoaded) {
-      //bodytypes.map(b => {
-        //return BodyType.create(b, BodyTypes[b])
-      //});
-    //}
-    //_bodytypesLoaded = true;
-  //},
-  //loadBehaviors: function loadBehaviors(behaviors) {
-    //if (!_behaviorsLoaded) {
-      //behaviors.forEach(b => {
-        //let [group, key] = b.split('.');
-        //Behavior.create(b, Behaviors[group][key]);
-      //});
-      //_behaviorsLoaded = true;
-    //}
-  //},
-  loadComponents: function loadComponents(components) {
+  loadBodyTypes: function loadBodyTypes(bodytypes = []) {
+    if (!_bodytypesLoaded) {
+      bodytypes.map(b => {
+        return BodyType.create(b, BodyTypes[b])
+      });
+    }
+    _bodytypesLoaded = true;
+  },
+  loadBehaviors: function loadBehaviors(behaviors = []) {
+    if (!_behaviorsLoaded) {
+      behaviors.forEach(b => {
+        let [group, key] = b.split('.');
+        Behavior.create(b, Behaviors[group][key]);
+      });
+      _behaviorsLoaded = true;
+    }
+  },
+  loadComponents: function loadComponents(components = []) {
     if (!_componentsLoaded) {
       components.map(c => {
         let [group, key] = c.split('.');
@@ -71,6 +80,8 @@ var Plexi = {
       if (m === 'requires') {
         //console.log(config[m]);
         this.loadComponents(config[m].components);
+        this.loadBehaviors(config[m].behaviors);
+        this.loadBodyTypes(config[m].bodytypes)
         this.loadActions(config[m].actions);
 
       } else if (this.hasOwnProperty(m)){
@@ -89,6 +100,7 @@ var Plexi = {
     //console.log(game);
     //this.Game = game;
     this.Game.refresh();
+    this.Game.reset();
     return this.Game;
   },
 

@@ -2,6 +2,7 @@ module.exports = {
   requires: {
     components: ['UI.Div', 'UI.Button', 'Composite.List', 'Display.Canvas'],
     behaviors: [],
+    bodytypes: ['Rectangle', 'Circle'],
     actions: ['Base'],
   },
   Action: {
@@ -19,7 +20,7 @@ module.exports = {
           {
             type: 'CHANGE_STATE',
             payload: {
-              ref: '$counter',
+              ref: '$bodytype',
               value: '@id',
             },
           },
@@ -33,18 +34,30 @@ module.exports = {
       },
       props: {
         actions: [
+          //{
+            //type: 'CHANGE_STATE',
+            //payload: {
+              //ref: '$position.x',
+              //value: '#position.x',
+            //},
+          //},
+          //{
+            //type: 'CHANGE_STATE',
+            //payload: {
+              //ref: '$position.y',
+              //value: '#position.y',
+            //},
+          //},
           {
-            type: 'CHANGE_STATE',
+            type: 'CREATE_BODY',
             payload: {
-              ref: '$position.x',
-              value: '#position.x',
-            },
-          },
-          {
-            type: 'CHANGE_STATE',
-            payload: {
-              ref: '$position.y',
-              value: '#position.y',
+              bodytype: '$bodytype',
+              config: {
+                position: {
+                  x: '#position.x',
+                  y: '#position.y',
+                }
+              },
             },
           },
         ],
@@ -53,11 +66,25 @@ module.exports = {
   },
   BodyType: {
     Square: {
-      behaviors: ['BodyType.Rectangle'],
+      behaviors: ['Rectangle'],
       props: {
         width: 50,
         height: 50,
         background: 'black',
+      },
+    },
+    Circ: {
+      behaviors: ['Circle'],
+      props: {
+        radius: 25,
+        fillStyle: 'blue',
+      },
+    },
+  },
+  World: {
+    Main: {
+      refs: {
+        gravity: 0.01,
       },
     },
   },
@@ -231,7 +258,7 @@ module.exports = {
             props: {
               position: {row: 4, column: 0},
               size: {rows: 1, columns: 5},
-              items: '$$Component.children'
+              items: '$$BodyType.children'
             },
           },
 
