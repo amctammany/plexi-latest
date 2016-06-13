@@ -46,8 +46,10 @@ function findBehavior(bhvr) {
 
 class Module {
   constructor(stamp, ...templates) {
-    //console.log(templates);
+    //if (templates.length)
+      //console.log(templates);
     if (stamp.hasOwnProperty('behaviors')) {
+      console.log(stamp.behaviors)
       templates.push(...stamp.behaviors);
     }
     //console.log(templates);
@@ -55,12 +57,15 @@ class Module {
       if (isObject(t)) {
         if (t.fixed) return t;
         let behaviors = (t.behaviors || []).map(findBehavior);
+        //console.log(t);
         return new Stamp(t).compose(...behaviors);
       } else {
+        console.log('foo?')
         return;
       }
     }).filter(t => {
-      return !!t;
+      return true;
+      //return !!t;
     });
     let s = (new Stamp(stamp)).compose(...temps);
     return s;
@@ -68,7 +73,7 @@ class Module {
 
 
   static create(id, config, ...stamps) {
-    //if (stamps.length) console.log(stamps);
+    if (stamps.length) console.log(stamps);
     this._children = this._children || {};
     let m = new this(config, ...stamps);
     m.fixed.refs._type = id;

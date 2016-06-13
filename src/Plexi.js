@@ -50,7 +50,9 @@ var Plexi = {
   loadBodyTypes: function loadBodyTypes(bodytypes = []) {
     if (!_bodytypesLoaded) {
       bodytypes.map(b => {
-        return BodyType.create(b, BodyTypes[b])
+        var bt = BodyType.create(b, BodyTypes[b], {refs: {creator: 'Plexi'}})
+        console.log(bt);
+        return bt;
       });
     }
     _bodytypesLoaded = true;
