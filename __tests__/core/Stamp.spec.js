@@ -2,6 +2,7 @@ jest.unmock('../../src/core/Stamp');
 
 var Stamp = require('../../src/core/Stamp');
 
+var isStamp = Stamp.isStamp;
 var testStamp, otherStamp, doubleStamp, composeStamp, stamp, other;
 
 var TestStamp = {
@@ -62,6 +63,9 @@ describe('Stamp', () => {
 
   it('should replicate', () => {
     //console.log(doubleStamp);
+  });
+  it('should identify stamp', () => {
+    expect(isStamp(testStamp)).toBe(true);
   });
   it('should fail to add init with bad method', () => {
     let oldCount = testStamp.fixed.init.length;

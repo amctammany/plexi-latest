@@ -13,7 +13,7 @@ var ActionStamp = {
         return this.exec(src, payload, data);
       } else if (this.actions) {
         return this.actions.map(a => {
-          console.log(data);
+          //console.log(data);
           return Plexi.Game.dispatch(src, a, data);
           //let action = Action.find(a.type);
           //console.log(action);

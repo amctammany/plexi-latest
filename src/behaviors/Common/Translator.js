@@ -1,5 +1,13 @@
 import {isObject, get} from 'lodash';
-import {mergeUnique} from 'supermixer';
+import supermixer from 'supermixer';
+
+var mergeData = supermixer({
+  filter: function (src) {
+    return typeof src !== 'function' && src !== 'fixed'; },
+  deep: false,
+
+
+});
 
 var Translator = {
   behaviors: [],
@@ -29,7 +37,7 @@ var Translator = {
           result[k] = r;
         }
       });
-      let r = mergeUnique(result, o);
+      let r = mergeData(result, o);
       //console.log(r)
       return r;
     },

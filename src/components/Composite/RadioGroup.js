@@ -80,7 +80,7 @@ var RadioGroup = {
         //console.log(this.translate(i))
         //let item = this.translate(i);
         //item._translated = true;
-        let item = Object.assign({}, i);
+        let item = merge({}, i);
         //item.text = i.text;
         item._id = index;
         let action = i.action || this.itemAction;

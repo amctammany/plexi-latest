@@ -70,7 +70,19 @@ function compose(...factories) {
   //console.log(result)
   return result;
 }
-
+function isStamp(obj) {
+  console.log(obj);
+  return (
+    //isFunction(obj) &&
+    isFunction(obj.methods) &&
+    // isStamp can be called for old stampit factory object.
+    // We should check old names (state and enclose) too.
+    isFunction(obj.refs) &&
+    isFunction(obj.init) &&
+    isFunction(obj.props) &&
+    isObject(obj.fixed)
+  );
+}
 
 class Stamp {
   constructor(config) {
@@ -110,5 +122,7 @@ class Stamp {
 }
 
 module.exports = Stamp;
+
+module.exports.isStamp = isStamp;
 
 

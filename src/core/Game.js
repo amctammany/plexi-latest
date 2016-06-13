@@ -204,7 +204,6 @@ class Game {
     }
     let action = Action.find(event.type);
     if (!!action) {
-      console.log(event);
 
       let a = action.create({});
       a.execute(src, event.payload, data);
