@@ -1,4 +1,6 @@
 import {isObject, get} from 'lodash';
+import {mergeUnique} from 'supermixer';
+
 var Translator = {
   behaviors: [],
   refs: {
@@ -27,8 +29,9 @@ var Translator = {
           result[k] = r;
         }
       });
-      //console.log(result)
-      return result;
+      let r = mergeUnique(result, o);
+      //console.log(r)
+      return r;
     },
   },
 };

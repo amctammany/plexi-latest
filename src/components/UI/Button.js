@@ -16,7 +16,7 @@ var Button = {
     onclick: function onclick(){
       //console.log(this.action);
       let action = this.getRef('action');
-      //console.log(this.action);
+      console.log(this.action);
       Plexi.Game.dispatch(this, action);
       //console.log(this);
     },

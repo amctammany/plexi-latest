@@ -30,6 +30,10 @@ var List = {
       this.grid.columns = this.orientation === 'horizontal' ? length : 1;
       this._components = items.map((item, i) => {
         let position = this.orientation === 'vertical' ? {row: i, column: 0} : {row: 0, column: i};
+        //if (!item._translated) {
+          //item = this.translate(item);
+        //}
+        //console.log(item);
         let formattedItem = Object.assign(this.translate(item), {position,});
         //console.log(formattedItem)
         let t = template.create(formattedItem);

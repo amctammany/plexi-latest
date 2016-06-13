@@ -59,40 +59,52 @@ var RadioGroup = {
       var items;
       if (isArray(this.items)) {
         items = this.items;
-      } else if (isObject(this.items)) {
-        items = values(this.items);
       } else {
-        let itemsRef = this.getRef(this.items);
-        items = isArray(itemsRef) ? itemsRef : [];
+        let res = this.getRef(this.items);
+        //console.log(res);
+        if (isArray(res)) {
+          items = res.map(i => {
+            //console.log(this.translate(i));
+            return this.translate(i)
+          });
+          //console.log(items);
+        } else if (isObject(res)) {
+          items = values(res);
+        } else {
+          let itemsRef = this.getRef(this.items);
+          items = isArray(itemsRef) ? itemsRef : [];
+        }
       }
-      return items.map((i, index) => {
+      //console.log(items);
+      var is = items.map((i, index) => {
         //console.log(this.translate(i))
         //let item = this.translate(i);
-        //
-        let item = {};
-        item.text = i.text;
+        //item._translated = true;
+        let item = Object.assign({}, i);
+        //item.text = i.text;
         item._id = index;
+        let action = i.action || this.itemAction;
         item.style = i.style || {};
         item.classes = i.classes || {};
         Object.assign(item.style, this.itemStyle);
         Object.assign(item.classes, this.itemClasses);
         item.action = [selectAction];
-        //console.log(item.action);
-        if (isArray(i.action)) {
-          item.action.concat(i.action);
-        } else if (isObject(i.action)) {
+        if (isArray(action)) {
           //console.log(i.action);
-          item.action.push(i.action);
-          //console.log(item.action);
+          item.action.push(...action);
+        } else if (isObject(action)) {
+          //console.log(i.action);
+          item.action.push(action);
         } else {
 
         }
+          //console.log(item.action);
         item.action = item.action.reverse();
+        //console.log(item.action);
         return item;
-        console.log(i.action)
-        //console.log(i)
       });
-      return items;
+      //console.log(is);
+      return is;
     },
     select: function select(ident) {
       let id = this.getRef(ident);

@@ -13,13 +13,6 @@ module.exports = {
           {
             type: 'CHANGE_STATE',
             payload: {
-              ref: '@selected',
-              value: '@id',
-            },
-          },
-          {
-            type: 'CHANGE_STATE',
-            payload: {
               ref: '$bodytype',
               value: '@id',
             },
@@ -92,22 +85,28 @@ module.exports = {
     BottomButton: {
       _componentType: 'UI.Button',
       refs: {
-
-      },
-      props: {
         action: {
           type: 'BOTTOM_BUTTON_PRESS',
           payload: {
-            id: '@id',
+            id: 'foo',
           },
+          //type: 'CHANGE_STATE',
+          //payload: {
+            //ref: '$bodytype',
+            //value: '@id',
+          //},
         },
+
+      },
+      props: {
+        text: '@id',
         style: {
           background: 'grey',
         },
       },
     },
     Menu: {
-      _componentType: 'Composite.List',
+      _componentType: 'Composite.RadioGroup',
       refs: {
         items: '$$BodyType.children',
         template: 'BottomButton',
@@ -118,7 +117,13 @@ module.exports = {
             id: '@text',
           },
         },
-        classes: {
+        itemAction: {
+          type: 'BOTTOM_BUTTON_PRESS',
+          payload: {
+            id: '@id',
+          },
+        },
+        itemClasses: {
           selected: {
             border: '2px solid white',
           },

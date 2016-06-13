@@ -41,7 +41,6 @@ var ComponentStamp = {
       });
     }
     this.postUpdate = this.postUpdate || function (game, state) {
-      //console.log(this.text);
       if (this.text !== undefined) {
         let text = this.getRef(this.text);
         this.$el.innerHTML = (text !== undefined) ? text : 'foo';
