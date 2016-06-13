@@ -15,6 +15,7 @@ var Translator = {
       //console.log(this);
       dict = dict || this.dictionary;
       //console.log(dict);
+      //console.log(o);
       if (!dict) return o;
       let result = {};
       //console.log(o);

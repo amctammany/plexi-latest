@@ -49,7 +49,7 @@ class Module {
     //if (templates.length)
       //console.log(templates);
     if (stamp.hasOwnProperty('behaviors')) {
-      console.log(stamp.behaviors)
+      //console.log(stamp.behaviors)
       templates.push(...stamp.behaviors);
     }
     //console.log(templates);
@@ -73,7 +73,7 @@ class Module {
 
 
   static create(id, config, ...stamps) {
-    if (stamps.length) console.log(stamps);
+    //if (stamps.length) console.log(stamps);
     this._children = this._children || {};
     let m = new this(config, ...stamps);
     m.fixed.refs._type = id;

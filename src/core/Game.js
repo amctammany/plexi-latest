@@ -1,7 +1,7 @@
 import Action from './modules/Action';
 import Stage from './modules/Stage';
 import World from './modules/World';
-import {isFunction, isObject, isString, get, set} from 'lodash';
+import {isFunction, isObject, isArray, isString, get, set} from 'lodash';
 
 function parseStyle(style, prefix = '') {
   let s = Object.keys(style).map(parent => {
@@ -196,6 +196,12 @@ class Game {
 
   dispatch(src, event, data) {
     if (!event) return;
+    if (isArray(event)) {
+      event.forEach(e => {
+        this.dispatch(src, e, data);
+      })
+      return;
+    }
     let action = Action.find(event.type);
     if (!!action) {
 

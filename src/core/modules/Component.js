@@ -62,6 +62,22 @@ var ComponentStamp = {
       merge(element.style, style);
 
     },
+    addClass: function addClass(className) {
+      if (this._classNames.indexOf(className) >= 0) {
+        return;
+      } else {
+        this._classNames.push(className);
+      }
+    },
+    removeClass: function removeClass(className) {
+      let index = this._classNames.indexOf(className);
+      if (index >= 0) {
+        return this._classNames.splice(index, 1);
+      } else {
+        return;
+      }
+    },
+
     render: function render(parent, element) {
       //this.game = parent.game;
       this.parent = parent;
@@ -79,10 +95,15 @@ var ComponentStamp = {
         })
       }
 
-      this._classNames = ['Component', type];
+      //console.log(this._classNames);
+      //if (this._classNames) return;
+
+      this._classNames = this._classNames || ['Component', type];
       if (this.className) {
         this._classNames.push(this.className);
       }
+      //console.log(this._classNames)
+
 
       var pos;
       if (parent && parent.getPosition) {
@@ -135,6 +156,7 @@ var ComponentStamp = {
       if (!this.$el) return;
       this.$el.classList = [];
       this._classNames.forEach(c => {
+        //console.log(c);
         this.$el.classList.add(this.getRef(c));
       });
 

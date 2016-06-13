@@ -55,8 +55,8 @@ describe('Module', () => {
     let newmod = Module.create('newmod', config, templates);
     //console.log(newmod);
   });
-  it('should bypass invalid template if given', () => {
-    let newmod = Module.create('newmod', config, 'foobar', templates);
+  it('should throw error if invalid template', () => {
+    expect(() => Module.create('newmod', config, 'foobar', templates)).toThrow(new Error('Uncomposable Factory'));
   });
 
 });

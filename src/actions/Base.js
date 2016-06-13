@@ -47,7 +47,7 @@ var SOURCE_METHOD = {
     exec: function exec(src, payload, data) {
       let source = src;
       let args = src.getRef(payload.args, data);
-      console.log(source);
+      //console.log(source);
       while (source) {
         let fn = source[payload.fn];
         if (fn) {

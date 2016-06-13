@@ -51,7 +51,6 @@ var Plexi = {
     if (!_bodytypesLoaded) {
       bodytypes.map(b => {
         var bt = BodyType.create(b, BodyTypes[b], {refs: {creator: 'Plexi'}})
-        console.log(bt);
         return bt;
       });
     }

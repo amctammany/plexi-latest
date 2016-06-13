@@ -1,6 +1,6 @@
 module.exports = {
   requires: {
-    components: ['UI.Div', 'UI.Button', 'Composite.List', 'Display.Canvas'],
+    components: ['UI.Div', 'UI.Button', 'Composite.List', 'Composite.RadioGroup', 'Display.Canvas'],
     behaviors: [],
     bodytypes: ['Rectangle', 'Circle'],
     actions: ['Base'],
@@ -109,6 +109,7 @@ module.exports = {
     Menu: {
       _componentType: 'Composite.List',
       refs: {
+        items: '$$BodyType.children',
         template: 'BottomButton',
         orientation: 'horizontal',
         dictionary: {
@@ -167,6 +168,63 @@ module.exports = {
               position: {row: 0, column: 0},
               text: 'button',
               action: [],
+            },
+          },
+        ],
+      },
+    },
+    CanvasSelectMenuButton: {
+      _componentType: 'UI.Button',
+      refs: {
+
+      },
+      props: {
+
+      },
+    },
+    CanvasSelectMenu: {
+      _componentType: 'Composite.RadioGroup',
+      refs: {
+        template: 'CanvasSelectMenuButton',
+        orientation: 'horizontal',
+        grid: {
+          padding: 10,
+        },
+      },
+      props: {
+        style: {
+          background: 'green',
+        },
+        items: [
+          {
+            text: 'Create',
+            action: {
+              type: 'CHANGE_STATE',
+              payload: {
+                ref: '$CanvasSelectTool',
+                value: 'CREATE',
+              },
+            },
+          },
+          {
+            text: 'Select',
+            action: {
+              type: 'CHANGE_STATE',
+              payload: {
+                ref: '$CanvasSelectTool',
+                value: 'SELECT',
+              },
+            },
+
+          },
+          {
+            text: 'Delete',
+            action: {
+              type: 'CHANGE_STATE',
+              payload: {
+                ref: '$CanvasSelectTool',
+                value: 'DELETE',
+              },
             },
           },
         ],
@@ -240,7 +298,7 @@ module.exports = {
         grid: {rows: 5, columns: 5, padding: 10},
         components: [
           {
-            type: 'GreenDiv',
+            type: 'CanvasSelectMenu',
             props: {
               position: {row: 0, column: 0},
               size: {rows: 1, columns: 5},
@@ -258,7 +316,6 @@ module.exports = {
             props: {
               position: {row: 4, column: 0},
               size: {rows: 1, columns: 5},
-              items: '$$BodyType.children'
             },
           },
 
