@@ -9,6 +9,7 @@ import World from './core/modules/World';
 
 import Actions from './actions/';
 import BodyTypes from './bodytypes/';
+import Behaviors from './behaviors/';
 import Components from './components/';
 
 var _componentsLoaded = false,

@@ -101,6 +101,40 @@ var LOAD_LEVEL = {
     },
   },
 };
+var DELETE_BODY = {
+  props: {},
+  refs: {},
+  methods: {
+    exec: function exec(src, payload, data) {
+      console.log(payload)
+      let load = src.getRef(payload, data);
+      console.log(load);
+      let bodies = Plexi.Game.World.findBody(load.position);
+      bodies.forEach(b => {
+        Plexi.Game.World.removeBody(b);
+      });
+    },
+  },
+};
+var SELECT_BODY = {
+  props: {
+
+  },
+  refs: {
+
+  },
+  methods: {
+    exec: function exec(src, payload, data) {
+      let load = src.getRef(payload, data);
+      //console.log(load);
+      let bodies = Plexi.Game.World.findBody(load.position);
+
+      bodies.forEach(b => {
+        b.fillStyle = 'red';
+      })
+    },
+  },
+};
 var CREATE_BODY = {
   props: {
 
@@ -145,7 +179,7 @@ var CHANGE_STATE = {
         src.setRef(ref, value);
       }
       //if (src.update) src.update(Plexi.Game);
-      if (Plexi.Game) Plexi.Game.refresh();
+      //if (Plexi.Game) Plexi.Game.refresh();
 
     },
   },
@@ -172,6 +206,8 @@ var LOG_OBJECT = {
 
 var Base = {
   CHANGE_BODY,
+  SELECT_BODY,
+  DELETE_BODY,
   LOAD_LEVEL,
   CHANGE_STATE,
   SOURCE_METHOD,

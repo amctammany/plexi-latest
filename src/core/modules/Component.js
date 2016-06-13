@@ -61,6 +61,9 @@ var ComponentStamp = {
       merge(element.style, style);
 
     },
+    getAction: function getAction() {
+      return this.action;
+    },
     addClass: function addClass(className) {
       if (this._classNames.indexOf(className) >= 0) {
         return;

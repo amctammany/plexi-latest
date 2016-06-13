@@ -1,7 +1,7 @@
 module.exports = {
   requires: {
     components: ['UI.Div', 'UI.Button', 'Composite.List', 'Composite.RadioGroup', 'Display.Canvas'],
-    behaviors: [],
+    behaviors: ['Component.TypedActions'],
     bodytypes: ['Rectangle', 'Circle'],
     actions: ['Base'],
   },
@@ -21,26 +21,44 @@ module.exports = {
         ],
       },
     },
-    CANVAS_MOUSEDOWN: {
+    CANVAS_SELECT: {
+      refs: {},
+      props: {
+        actions: [
+          {
+            type: 'SELECT_BODY',
+            payload: {
+              position: {
+                x: '#position.x',
+                y: '#position.y',
+              },
+            },
+          },
+        ],
+      },
+    },
+    CANVAS_DELETE: {
+      refs: {},
+      props: {
+        actions: [
+          {
+            type: 'DELETE_BODY',
+            payload: {
+              position: {
+                x: '#position.x',
+                y: '#position.y',
+              },
+            },
+          },
+        ],
+      },
+    },
+    CANVAS_CREATE: {
       refs: {
 
       },
       props: {
         actions: [
-          //{
-            //type: 'CHANGE_STATE',
-            //payload: {
-              //ref: '$position.x',
-              //value: '#position.x',
-            //},
-          //},
-          //{
-            //type: 'CHANGE_STATE',
-            //payload: {
-              //ref: '$position.y',
-              //value: '#position.y',
-            //},
-          //},
           {
             type: 'CREATE_BODY',
             payload: {
@@ -143,9 +161,21 @@ module.exports = {
     },
     MainCanvas: {
       _componentType: 'Display.Canvas',
+      behaviors: ['Component.TypedActions'],
       refs: {
+        actions: {
+          CREATE: {
+            type: 'CANVAS_CREATE',
+          },
+          SELECT: {
+            type: 'CANVAS_SELECT',
+          },
+          DELETE: {
+            type: 'CANVAS_DELETE',
+          }
+        },
         action: {
-          type: 'CANVAS_MOUSEDOWN',
+          type: 'CANVAS_CREATE',
           payload: {
             //x: '#position.x',
             //y: '#position.y',
@@ -154,7 +184,7 @@ module.exports = {
 
       },
       props: {
-
+        _actionType: '$CanvasSelectTool',
       },
     },
     RedDiv: {

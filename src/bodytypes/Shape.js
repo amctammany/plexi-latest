@@ -26,6 +26,11 @@ var Shape = {
       //this.x += dx;
       //this.y += dy;
     },
+
+    isPointInPath: function isPointInPath(ctx, x, y) {
+      this.createPath(ctx);
+      return ctx.isPointInPath(x, y);
+    },
     fill: function fill(ctx) {
       ctx.save();
       ctx.fillStyle = this.fillStyle;

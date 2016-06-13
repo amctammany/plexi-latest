@@ -196,6 +196,7 @@ class Game {
 
   dispatch(src, event, data) {
     if (!event) return;
+      //console.log(event);
     if (isArray(event)) {
       event.forEach(e => {
         this.dispatch(src, e, data);

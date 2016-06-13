@@ -35,6 +35,8 @@ var Canvas = {
   methods: {
     onclick: function onclick(e) {
       //console.log(game);
+      let action = this.getAction();
+      //console.log(action);
       let game = Plexi.Game;
       let data = {
         position: {
@@ -44,7 +46,7 @@ var Canvas = {
       };
       let x = e.offsetX;
       let y = e.offsetY;
-      game.dispatch(this, this.action, data);
+      game.dispatch(this, action, data);
 
     }
 

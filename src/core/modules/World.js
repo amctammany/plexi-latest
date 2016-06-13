@@ -9,7 +9,8 @@ var WorldStamp = {
 
   },
   init: function init() {
-
+    this.width = Plexi.Game.getRef('width');
+    this.height = Plexi.Game.getRef('height');
   },
   methods: {
     addBody: function addBody(type, config) {
@@ -29,9 +30,25 @@ var WorldStamp = {
         return body;
       }
     },
+    findBody: function findBody(position) {
+      let x = position.x, y = position.y;
+      let res = this.bodies.filter(b => {
+        //console.log(b);
+        return b.isPointInPath(this._ctx, x, y);
+      })
+      console.log(res);
+      return res;
+    },
+    removeBody: function removeBody(body) {
+      var index = this.bodies.indexOf(body);
+      console.log(index)
+      this.bodies.splice(index, 1);
+    },
     render: function render(canvas) {
       let ctx = canvas.getContext('2d');
       ctx.clearRect(0, 0, this.width, this.height);
+      this._ctx = ctx;
+      //console.log(this.bodies);
       this.bodies.forEach(b => {
         b.render(ctx);
         //ctx.beginPath();
