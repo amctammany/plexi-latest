@@ -71,7 +71,7 @@ function compose(...factories) {
   return result;
 }
 function isStamp(obj) {
-  console.log(obj);
+  //console.log(obj);
   return (
     //isFunction(obj) &&
     isFunction(obj.methods) &&

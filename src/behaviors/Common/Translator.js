@@ -1,10 +1,12 @@
+import {isStamp} from '../../core/Stamp';
 import {isObject, get} from 'lodash';
 import supermixer from 'supermixer';
 
 var mergeData = supermixer({
   filter: function (src) {
-    return typeof src !== 'function' && src !== 'fixed'; },
-  deep: false,
+    //console.log(src);
+    //console.log(isStamp(src));
+    return typeof src !== 'function' && isStamp(src) === false; },
 
 
 });
@@ -37,6 +39,8 @@ var Translator = {
           result[k] = r;
         }
       });
+      //console.log(o);
+      //return result;
       let r = mergeData(result, o);
       //console.log(r)
       return r;
