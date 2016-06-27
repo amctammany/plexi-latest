@@ -32,6 +32,13 @@ module.exports = {
                 x: '#position.x',
                 y: '#position.y',
               },
+              action: {
+                type: 'CHANGE_STATE',
+                payload: {
+                  ref: '$selectedBodies',
+                  value: '#bodies',
+                },
+              },
             },
           },
         ],
@@ -105,14 +112,6 @@ module.exports = {
       refs: {
         action: {
           type: 'BOTTOM_BUTTON_PRESS',
-          payload: {
-            id: 'foo',
-          },
-          //type: 'CHANGE_STATE',
-          //payload: {
-            //ref: '$bodytype',
-            //value: '@id',
-          //},
         },
 
       },
@@ -137,9 +136,6 @@ module.exports = {
         },
         itemAction: {
           type: 'BOTTOM_BUTTON_PRESS',
-          payload: {
-            id: '@id',
-          },
         },
         itemClasses: {
           selected: {

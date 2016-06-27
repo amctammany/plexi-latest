@@ -129,6 +129,8 @@ var SELECT_BODY = {
       //console.log(load);
       let bodies = Plexi.Game.World.findBody(load.position);
 
+      console.log(payload.action);
+      Plexi.Game.dispatch(src, payload.action, {bodies})
       bodies.forEach(b => {
         b.fillStyle = 'red';
       })
